@@ -7,7 +7,7 @@ import time
 
 def stop_model(model_arn):
 
-    client=boto3.client('rekognition')
+    client = boto3.client('rekognition', region_name='us-east-2')
 
     print('Stopping model:' + model_arn)
 

@@ -50,7 +50,7 @@ def display_image(bucket,photo,response):
     image.show()
 
 def show_custom_labels(model,bucket,photo, min_confidence):
-    client=boto3.client('rekognition')
+    client = boto3.client('rekognition', region_name='us-east-2')
 
     #Call DetectCustomLabels
     response = client.detect_custom_labels(Image={'S3Object': {'Bucket': bucket, 'Name': photo}},
@@ -58,14 +58,14 @@ def show_custom_labels(model,bucket,photo, min_confidence):
         ProjectVersionArn=model)
 
     # For object detection use case, uncomment below code to display image.
-    # display_image(bucket,photo,response)
+    display_image(bucket,photo,response)
 
     return len(response['CustomLabels'])
 
 def main():
 
-    bucket='MY_BUCKET'
-    photo='MY_IMAGE_KEY'
+    bucket='miniso-run-model'
+    photo='run_images/0200048771/0200048771_4.jpg'
     model='arn:aws:rekognition:us-east-2:024848459997:project/Miniso_app/version/Miniso_app.2024-10-30T14.00.30/1730307631212'
     min_confidence=95
 
